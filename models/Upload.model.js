@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const uploadSchema = mongoose.Schema({
-  img: String,
+  image: String,
 });
 
 const Upload = mongoose.model("Upload", uploadSchema);

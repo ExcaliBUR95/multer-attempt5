@@ -13,14 +13,18 @@ app.use("/upload", express.static(path.resolve(__dirname, "upload")));
 
 app.use(require("./routes/upload.rote"));
 
-mongoose
-  .connect(
-    "mongodb+srv://into:code@cluster0.odtfl.mongodb.net/uploadPhotoAttempt3"
-  )
-  .then(() => {
-    console.log("Монгусь склеился");
-  });
+const connected = async () => {
+  try {
+    await mongoose.connect(
+      "mongodb+srv://into:code@cluster0.odtfl.mongodb.net/uploadPhotoAttempt3"
+    );
+    console.log("Вы успешно подключились к MongoDB!");
+    app.listen(port, () => {
+      console.log("Server has been started!");
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-app.listen(port, () => {
-  console.log("Слушает твои команды http://localhost:" + port);
-});
+connected();
